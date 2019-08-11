@@ -4,6 +4,16 @@ import 'package:imc/components/reusable_card.dart';
 import 'package:imc/components/bottom_button.dart';
 
 class ResultsPage extends StatelessWidget {
+  ResultsPage({
+    @required this.imcResult,
+    @required this.resultText,
+    @required this.interpretation,
+  });
+
+  final String imcResult;
+  final String resultText;
+  final String interpretation;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,17 +43,20 @@ class ResultsPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    'Acima do Peso',
+                    resultText.toUpperCase(),
                     style: kResultTextStyle,
                   ),
                   Text(
-                    '18.3',
+                    imcResult,
                     style: kIMCTextStyle,
                   ),
-                  Text(
-                    'Lorem Ipsum dolores',
-                    textAlign: TextAlign.center,
-                    style: kBodyTextStyle,
+                  Container(
+                    margin: EdgeInsets.all(15),
+                    child: Text(
+                      interpretation,
+                      textAlign: TextAlign.center,
+                      style: kBodyTextStyle,
+                    ),
                   ),
                 ],
               ),

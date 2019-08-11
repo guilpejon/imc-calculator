@@ -5,6 +5,8 @@ import 'package:imc/components/reusable_card.dart';
 import 'package:imc/constants.dart';
 import 'package:imc/screens/results_page.dart';
 import 'package:imc/components/round_icon_button.dart';
+import 'package:imc/calculator_brain.dart';
+import 'package:imc/components/bottom_button.dart';
 
 enum Gender {
   male,
@@ -230,27 +232,23 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          GestureDetector(
+          BottomButton(
+            buttonTitle: 'CALCULAR',
             onTap: () {
+              CalculatorBrain calc =
+                  CalculatorBrain(height: height, weight: weight);
+
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ResultsPage(),
+                  builder: (context) => ResultsPage(
+                    imcResult: calc.getIMC(),
+                    resultText: calc.getResults(),
+                    interpretation: calc.getInterpretation(),
+                  ),
                 ),
               );
             },
-            child: Container(
-              child: Center(
-                child: Text(
-                  'CALCULAR',
-                  style: kLargeButtonTextStyle,
-                ),
-              ),
-              color: kBottomContainerColor,
-              margin: EdgeInsets.only(top: 10),
-              width: double.infinity,
-              height: kBottomContainerHeight,
-            ),
           )
         ],
       ),
